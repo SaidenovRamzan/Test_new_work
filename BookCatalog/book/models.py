@@ -33,7 +33,7 @@ class Book(models.Model):
 
 class Review(models.Model):
     """Коментарии к книге"""
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
     text = models.TextField()

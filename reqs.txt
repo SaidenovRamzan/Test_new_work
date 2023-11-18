@@ -1,2 +1,4 @@
 Django==3.2.23
 djangorestframework==3.14.0
+django-filter==23.3
+drf-yasg==1.21.7

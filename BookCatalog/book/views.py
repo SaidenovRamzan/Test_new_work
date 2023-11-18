@@ -3,8 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 
 from book.service import BookFilter
-from book.models import Book, Review, FavoriteBook
-from book.serializers import BookSerializer, ReviewSerializer, FavoriteBookSerializer, BookDetailSerializer
+from .models import Book, Review, FavoriteBook
+from .serializers import BookSerializer, ReviewSerializer, FavoriteBookSerializer, BookDetailSerializer
 
 
 class BookViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
