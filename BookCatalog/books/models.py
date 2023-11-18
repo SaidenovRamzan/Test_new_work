@@ -21,7 +21,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    publication_date = models.DateField()
+    publication_date = models.DateField("Дата выхода")
     description = models.TextField()
 
     def __str__(self):
