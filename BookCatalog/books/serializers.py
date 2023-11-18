@@ -22,17 +22,15 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    reviews = ReviewSerializer(many=True, read_only=True)
     is_favorite = serializers.SerializerMethodField()
     rating = serializers.SerializerMethodField()
-    genre = GenreSerializer()
-    author = AuthorSerializer()
+    author_name = serializers.CharField(source='author.name', read_only=True)
+    genre_name = serializers.CharField(source='genre.name', read_only=True)
     
     class Meta:
         model = Book
-        fields = ['id', 'title', 'genre', 
-                  'author', 'publication_date', 'description', 
-                  'reviews', 'is_favorite', 'rating',
+        fields = ['id', 'title', 'genre_name', 
+                  'author_name', 'is_favorite', 'rating',
         ]
 
     def get_is_favorite(self, obj):

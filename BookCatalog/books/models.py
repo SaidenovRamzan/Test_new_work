@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
+    """Жанры книги"""
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
@@ -10,6 +11,7 @@ class Genre(models.Model):
 
 
 class Author(models.Model):
+    """Авторы книги"""
     name = models.CharField(max_length=255)
     birth_date = models.DateField()
 
@@ -18,6 +20,7 @@ class Author(models.Model):
 
 
 class Book(models.Model):
+    """Книга"""
     title = models.CharField(max_length=255)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -29,6 +32,7 @@ class Book(models.Model):
 
 
 class Review(models.Model):
+    """Коментарии к книге"""
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
@@ -39,6 +43,7 @@ class Review(models.Model):
 
 
 class FavoriteBook(models.Model):
+    """Избранные книги"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 

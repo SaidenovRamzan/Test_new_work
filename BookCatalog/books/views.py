@@ -37,6 +37,8 @@ class FavoriteBookViewSet(viewsets.ModelViewSet):
 
 
 class BookListView(generics.ListAPIView):
+    """Главная страница с фильтрацией"""
+    
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     filter_backends = (DjangoFilterBackend, )
