@@ -11,7 +11,6 @@ router.register(r'book', BookViewSet)
 router.register(r'reviews', ReviewViewSet)
 router.register(r'favorites', FavoriteBookViewSet, basename='favoritebook')
 
-
 urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('', BookListView.as_view())

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 
 
 class Genre(models.Model):
@@ -34,18 +34,18 @@ class Book(models.Model):
 class Review(models.Model):
     """Коментарии к книге"""
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     rating = models.IntegerField()
     text = models.TextField()
 
     def __str__(self):
-        return f"{self.user.username} - {self.book.title}"
+        return f"{self.user.email} - {self.book.title}"
 
 
 class FavoriteBook(models.Model):
     """Избранные книги"""
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user.username} - {self.book.title}"
+        return f"{self.user.email} - {self.book.title}"

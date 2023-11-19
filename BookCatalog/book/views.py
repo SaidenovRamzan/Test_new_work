@@ -1,8 +1,8 @@
 from rest_framework import generics, mixins, viewsets
-from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 
 from book.service import BookFilter
+from book.permissions import IsTokenProvided
 from .models import Book, Review, FavoriteBook
 from .serializers import BookSerializer, ReviewSerializer, FavoriteBookSerializer, BookDetailSerializer
 
@@ -26,7 +26,7 @@ class BookListView(generics.ListAPIView):
 class ReviewViewSet(viewsets.ModelViewSet):
     """ViewSet для комментариев"""
     
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsTokenProvided]
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
@@ -34,7 +34,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
 class FavoriteBookViewSet(viewsets.ModelViewSet):
     """ViewSet для избранных книг"""
     
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsTokenProvided]
     queryset = FavoriteBook.objects.all()
     serializer_class = FavoriteBookSerializer
 

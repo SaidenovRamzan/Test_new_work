@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.db.models import Avg
 
 from book.models import Review, FavoriteBook, Book
+from accounts.service import get_user_from_token
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -28,8 +29,15 @@ class BookSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'genre_name', 'author_name', 'is_favorite', 'rating', 'detail']
 
     def get_is_favorite(self, obj) -> bool:
-        user = self.context['request'].user
-        return FavoriteBook.objects.filter(user=user, book=obj).exists()
+        user = get_user_from_token(self.context['request'])
+        if not user:
+            return False
+        try:
+            return FavoriteBook.objects.filter(user=user, book=obj).exists()
+        except: return False
     
     def get_rating(self, obj) -> float:
-        return Review.objects.filter(book=obj).aggregate(Avg('rating'))['rating__avg']
+        try:
+            return Review.objects.filter(book=obj).aggregate(Avg('rating'))['rating__avg']
+        except: return None
+        

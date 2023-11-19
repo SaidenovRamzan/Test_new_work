@@ -1,6 +1,8 @@
 from django_filters import rest_framework as filters
 from book.models import Book
-
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 class CharFilterInFilter(filters.BaseInFilter, filters.CharFilter):
     pass
